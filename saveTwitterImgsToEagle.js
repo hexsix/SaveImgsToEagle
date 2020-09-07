@@ -65,10 +65,7 @@
         var username = article[0];
         var content = new Array();
         try {
-            for (var i = 3; i < article.length; i++) {
-                if (article[i] === '翻译推文') { // zh-cn
-                    break;
-                }
+            for (var i = 3; i < article.length - 11; i++) {
                 content.push(article[i]);
             }
         } catch (e){
