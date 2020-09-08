@@ -66,7 +66,7 @@
         var tags = new Array();
         for (i = 0; i < tag_doms.length; i++) {
             var tag_text = tag_doms[i].innerText;
-            if (tag_text.search('users') === -1 && tag_text.search('收藏') === -1 && tag_text !== '*') {
+            if (tag_text.search('users') === -1 && tag_text.search('收藏') === -1 && tag_text.search('bookmarks') === -1 && tag_text !== '*') {
                 tags.push(tag_text);
             }
         }
