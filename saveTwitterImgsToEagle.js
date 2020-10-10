@@ -48,6 +48,7 @@
     }
 
     function main() {
+        var i = 0;
         // url
         var url = document.URL;
         // console.log(url);
@@ -60,18 +61,8 @@
         var userid = document.URL.split('/')[3];
         // console.log(userid);
 
-        // username and content
-        var article = $('article')[0].innerText.split('\n');
-        var username = article[0];
-        var content = new Array();
-        try {
-            for (var i = 3; i < article.length - 11; i++) {
-                content.push(article[i]);
-            }
-        } catch (e){
-            content = '';
-        };
-        // console.log(content);
+        // content
+        var content = $('article [lang]')[0].innerText;
 
         // img
         for (i = 0; i < 4; i++) {
@@ -84,7 +75,7 @@
                     "name": img_filename,
                     "website": url,
                     "tags": [userid],
-                    "annotation": content.join('\n'),
+                    "annotation": content,
                     "folderId": FOLDER_ID
                 };
                 // console.log(data);
