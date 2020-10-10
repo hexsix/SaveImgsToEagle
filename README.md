@@ -30,6 +30,7 @@ Save twitter.com/pixiv.net/yande.re images to eagle(a design library app).
 
 - [x] yande.re
 - [x] 等 pixiv 上线 api 自定义 headers 功能后更新 pixiv 脚本
+- [ ] pixiv 脚本存在一个 BUG，这个 BUG 导致收藏的标签会被加入所有保存的文件的 tag 里
 
 ## why Eagle
 
