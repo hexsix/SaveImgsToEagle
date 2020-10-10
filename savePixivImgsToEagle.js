@@ -33,7 +33,6 @@
     const EAGLE_SERVER_URL = "http://localhost:41595";
     const EAGLE_IMPORT_API_URL = `${EAGLE_SERVER_URL}/api/item/addFromURL`;
     const FOLDER_ID = "KEO8U45NNUHAO";
-    const LOCALHOST = "http://localhost:8024/";
 
     function addImageToEagle(data) {
         GM_xmlhttpRequest({
@@ -50,16 +49,11 @@
 
         // URL
         var url = document.URL;
-        // console.log(url);
 
         // images
         var img = $('img[src^="https://i.pximg.net/img-original/img/"]')[0];
         var img_url = img.getAttribute('src');
         var img_filename = img_url.split('/').pop();
-        GM_download(img_url, img_filename);
-        // console.log(img);
-        // console.log(img_url);
-        // console.log(img_filename);
 
         // tags
         var tag_doms = $('a[href^="/tags/"]');
@@ -70,18 +64,16 @@
                 tags.push(tag_text);
             }
         }
+        // tags.push('pickup');
         var uniqueTags = Array.from(new Set(tags));
-        // console.log(uniqueTags);
 
         // author
         var user_doms = $('a[href^="/users/"]');
         var author = user_doms[1].innerText; // the first user is you.
-        // console.log(author);
 
         // title: title may be none
         try {
             var title = $('h1')[0].innerText;
-            // console.log(title);
         } catch (e) {
             title = '无题'
         }
@@ -89,23 +81,23 @@
         // content: content may be none
         try {
             var content = $('.gxepem')[0].innerText;
-            // console.log(content);
         } catch (e) {
             content = ''
         }
 
         // save to eagle
         sleep(500).then(() => {
-            var path_to_img_file = LOCALHOST + img_filename;
             var data = {
-                "url": path_to_img_file,
+                "url": img_url,
                 "name": img_filename,
                 "website": url,
                 "tags": uniqueTags,
                 "annotation": title + '\n' + content,
-                "folderId": FOLDER_ID
+                "folderId": FOLDER_ID,
+                "headers": {
+                    "referer": url
+                }
             };
-            // console.log(data);
             addImageToEagle(data);
         });
     }
