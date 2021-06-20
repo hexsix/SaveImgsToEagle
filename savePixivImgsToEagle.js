@@ -69,7 +69,7 @@
 
         // author
         var user_doms = $('a[href^="/users/"]');
-        var author = user_doms[1].innerText; // the first user is you.
+        var author = user_doms[1].innerText; // the first user is you, so we choose the second
 
         // title: title may be none
         try {
@@ -95,7 +95,7 @@
                 "annotation": title + '\n' + content,
                 "folderId": FOLDER_ID,
                 "headers": {
-                    "referer": url
+                    "referer": "https://www.pixiv.net/"
                 }
             };
             addImageToEagle(data);
