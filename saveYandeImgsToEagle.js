@@ -43,29 +43,33 @@
 
         // URL
         var url = document.URL;
-        // console.log(url);
+        console.log(url);
 
         // images
-        var img = $('img[src^="https://files.yande.re/image/"]')[0];
+        //var img = $('img[src^="https://files.yande.re/image/"]')[0];
+        var img = $('img[id^="image"]')[0];
         var img_url = img.getAttribute('src');
         var img_filename = decodeURI(img_url).split('/').pop();
-        // console.log(img);
-        // console.log(img_url);
-        // console.log(img_filename);
+        console.log(img);
+        console.log(img_url);
+        console.log(img_filename);
 
         // tags
         var tag_doms = $('a[href^="/post?tags="]');
-        // console.log(tag_doms);
+        console.log(tag_doms);
         var tags = new Array();
         for (i = 2; i < tag_doms.length - 2; i++) {
             var tag_text = tag_doms[i].innerText;
-            tags.push(tag_text);
+            if (tag_text !== '+' && tag_text !== '–') {
+                tags.push(tag_text);
+            }
         }
-        // console.log(tags);
+        console.log(tags);
 
         // Source: source may be none
         try {
             var source = $('a[rel^="nofollow noopener noreferrer"]')[0].href;
+            source = 'Source: ' + source;
             console.log(source);
         } catch (e) {
             source = ''
@@ -77,10 +81,10 @@
             "name": img_filename,
             "website": url,
             "tags": tags,
-            "annotation": 'Source: ' + source,
+            "annotation": source,
             "folderId": FOLDER_ID
         };
-        // console.log(data);
+        console.log(data);
         addImageToEagle(data);
     }
 
